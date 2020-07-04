@@ -103,17 +103,21 @@ const router = {
     signer = typeof signer === 'boolean' ? signer : false;
     tester = typeof tester === 'tester' ? tester : false;
     treatOptions = typeof treatOptions === 'object' ? treatOptions : false;
-    let client = new User(name,url,signer,tester,treatOptions);
-    client.signer = signer;
-    client.tester = tester;
-    client.treatOptions = treatOptions;	  
-    payloadReq.method !== 'POST' ? (
-    res.writeHead(405),
-    res.end()	    
-    ):(
-    res.writeHead(200),
-    res.end(JSON.stringify(client))
-    )	    
+	    payloadReq.method !== 'POST' ? (
+	    res.writeHead(405),
+	    res.end()	    
+	    ):( name && url && treatOptions ? (
+	    client = new User(name,url,signer,tester,treatOptions),
+	    client.signer = signer,
+	    client.tester = tester,
+	    client.treatOptions = treatOptions,
+	    res.writeHead(200),
+	    res.end(JSON.stringify(client))
+	    ) : (
+	    res.writeHead(400),
+	    res.end(JSON.stringify({"Error":"Missing Required Fields"}))
+	      )
+	    )
   },
   blockchain: (payloadReq,res) => {
     res.setHeader('Content-Type','application/json');
