@@ -14,7 +14,7 @@ class Blockchain{
 
   generateNextBlock(transactions){
      const currentBlock = new Block();
-     transactions instanceOf 'Array' ? transactions.forEach(item => {
+     transactions = typeof transactions === 'object' ? transactions.forEach(item => {
        currentBlock.addTransaction(item)
      }) : false;
      const previousBlock = this.recoverPreviousBlock(this.blockList);

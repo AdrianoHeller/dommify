@@ -79,6 +79,20 @@ const router = {
 	res.end();    
     }
   },
+  sendInfo: (payloadReq,res) => {
+    res.setHeader('Content-Type','application-json');
+    payloadReq.method === 'POST' ? (
+      parsedBody = patterns.parser(payloadReq.body),
+      delete payloadReq.body,
+      payloadReq.body = parsedBody,
+      payloadReq.token = patterns.generateToken(30),
+      res.writeHead(200),
+      res.end(JSON.stringify(payloadReq))	    
+    ) : (
+      res.writeHead(405),
+      res.end()	    
+    )
+  },	
   minerate: (payloadReq,res) => {
     res.setHeader('Content-Type','application/json');
     res.writeHead(200);
