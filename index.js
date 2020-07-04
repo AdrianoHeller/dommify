@@ -1,6 +1,7 @@
 const { Block,mapTransactionData } = require('./libs/Block');
 const Blockchain = require('./libs/Blockchain');
 const Transaction = require('./libs/Transaction');
+const User = require('./libs/User');
 
 const http = require('http');
 const {StringDecoder} = require('string_decoder');
@@ -95,12 +96,23 @@ const router = {
   },	
   minerate: (payloadReq,res) => {
     res.setHeader('Content-Type','application/json');
+    const parsedBody = patterns.parser(payloadReq.body);
+    let { name,url,signer,tester,treatOptions } = parsedBody;
+    name = typeof name === 'string' && name.length > 0 ? name : false;
+    url = typeof url === 'string' && url.length > 0 ? url : false;
+    signer = typeof signer === 'boolean' ? signer : false;
+    tester = typeof tester === 'tester' ? tester : false;
+    treatOptions = typeof treatOptions === 'object' ? treatOptions : false;
+    let client = new User(name,url,signer,tester,treatOptions);
+    client.signer = signer;
+    client.tester = tester;
+    client.treatOptions = treatOptions;	  
     payloadReq.method !== 'POST' ? (
     res.writeHead(405),
     res.end()	    
     ):(
     res.writeHead(200),
-    res.end()
+    res.end(JSON.stringify(client))
     )	    
   },
   blockchain: (payloadReq,res) => {
