@@ -100,8 +100,16 @@ const router = {
   },
   blockchain: (payloadReq,res) => {
     res.setHeader('Content-Type','application/json');
-    res.writeHead(200);
-    res.end();    
+    payloadReq.method === 'GET' ? (
+    parsedBody = patterns.parser(payloadReq.body),
+    delete payloadReq.body,
+    payloadReq.body = parsedBody,    	    
+    res.writeHead(200),
+    res.end()
+    ):(
+    res.writeHead(405),
+    res.end()	    
+    )
   },	
 	
   notFound: (payloadReq,res) => {
