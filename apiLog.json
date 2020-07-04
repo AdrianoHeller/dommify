@@ -1,0 +1,8 @@
+{
+ "params":{},
+ "method":"POST",
+ "headers":{"host":"localhost:3000","user-agent":"curl/7.58.0","accept":"*/*","content-type":"application/json","content-length":"26"},
+ "path":"ping",
+ "body":{"nome":"Adriano Heller"},
+ "token":"a6pnf1y2ocr8nx26hg4yh0c87do0w5"
+}
