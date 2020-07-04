@@ -95,8 +95,13 @@ const router = {
   },	
   minerate: (payloadReq,res) => {
     res.setHeader('Content-Type','application/json');
-    res.writeHead(200);
-    res.end();    
+    payloadReq.method !== 'POST' ? (
+    res.writeHead(405),
+    res.end()	    
+    ):(
+    res.writeHead(200),
+    res.end()
+    )	    
   },
   blockchain: (payloadReq,res) => {
     res.setHeader('Content-Type','application/json');
