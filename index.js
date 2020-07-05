@@ -106,7 +106,7 @@ const router = {
   },
   'buy/month': (payloadReq,res) => {
    res.setHeader('Content-Type','application/json');
-   res.writeHead(302,{locate:'/notFound'});
+   res.writeHead(302,{Location:'/payment'});
    res.end();	  
   },
   payment: (payloadReq,res) => {
