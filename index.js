@@ -93,6 +93,26 @@ const router = {
       res.writeHead(405),
       res.end()	    
     )
+  },
+  buy: (payloadReq,res) => {
+    res.setHeader('Content-Type','application/json');
+    payloadReq.method === 'GET' ? (
+    res.writeHead(200),
+    res.end()	    
+    ):(
+    res.writeHead(405),
+    res.end() 
+    )
+  },
+  'buy/month': (payloadReq,res) => {
+   res.setHeader('Content-Type','application/json');
+   res.writeHead(302,{locate:'/notFound'});
+   res.end();	  
+  },
+  payment: (payloadReq,res) => {
+   res.setHeader('Content-Type','application/json');
+   res.writeHead(200);
+   res.end();	  
   },	
   minerate: (payloadReq,res) => {
     res.setHeader('Content-Type','application/json');
